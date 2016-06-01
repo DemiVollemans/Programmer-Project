@@ -1,6 +1,7 @@
 Research proposal:
  Franchising in Nederland door de Jaren heen.
 Demi Vollemans
+
 Aan sport wordt veel geld uitgegeven in Nederland, sommige sporten zijn  groter en populairder dan andere. Daarnaast zijn we op internationaal niveau succesvoller in de ene sport dan de andere. Met deze visualisatie wordt er inzicht gegeven hoe groot het verschil is in uitgaven aan franchising voor de 6 grootste sporten van Nederland, denk aan voetbal, hockey, tennis etc. 
 Daarnaast wordt er ook gekeken of er een verband is tussen de hoeveelheid franchising door de jaren heen en prestaties op internationaal niveau. Is Nederland beter geworden in een bepaalde sport, en zou dit kunnen komen omdat er meer geld in de desbetreffende sport is gestopt.
 
