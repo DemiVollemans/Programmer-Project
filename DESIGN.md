@@ -29,8 +29,5 @@ de andere 3 balken zulllen dezelfde functie hebben alleen voor de behaalde prijz
 daardoor kan de gebruiker inzicht krijgen of de waarde vermeerdering/mindering effect heeft gehad op de behaalde prijzen. 
 
 in de derde vizualisatie zal een soort van diagram verschijnen wat aan zal tonen welke prijzen zijn gewonnen, of dat op nationaal of internationaal niveau was. 
-<<<<<<< HEAD
 
 óok komt er een tijdbalk waarmee je door de 5 jaren heen kan gaan. 
-=======
->>>>>>> origin/master

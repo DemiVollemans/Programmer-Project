@@ -3,7 +3,8 @@ Research proposal:
 Demi Vollemans
 
 Aan sport wordt veel geld uitgegeven in Nederland, sommige sporten zijn  groter en populairder dan andere. Daarnaast zijn we op internationaal niveau succesvoller in de ene sport dan de andere. Met deze visualisatie wordt er inzicht gegeven hoe groot het verschil is in uitgaven aan franchising voor de 6 grootste sporten van Nederland, denk aan voetbal, hockey, tennis etc. 
-Daarnaast wordt er ook gekeken of er een verband is tussen de hoeveelheid franchising door de jaren heen en prestaties op internationaal niveau. Is Nederland beter geworden in een bepaalde sport, en zou dit kunnen komen omdat er meer geld in de desbetreffende sport is gestopt.
+Daarnaast wordt er ook gekeken of er een verband is tussen de hoeveelheid franchising door de jaren heen en prestaties op internationaal niveau. door beperkte data is ervoor gekozen om de 20 rijkste teams in de jaren 2010 tot 2015 te nemen om deze vergelijking te maken. Is er meer geld gestopt in teams die beter presteerde in het jaar ervoor.
+
 
 Het idee is om een bubbel diagram te maken waar het verschil in kleur van de bubbel de sport weergeeft. En de grootte van de bubbel de hoeveelheid geld. Zodra op een bubbel wordt geklikt zal een nieuwe visualisatie worden geopend waar overzichtelijk kan worden gezien of een sport succesvoller wordt op internationaal niveau naarmate er meer geld in een sport wordt gestopt en hoe zich dat in de afgelopen 5 jaar heeft ontwikkeld.
 
