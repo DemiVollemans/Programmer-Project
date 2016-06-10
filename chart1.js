@@ -9,7 +9,10 @@ var xValue = function (d){return d.years_competing; },
     xMap= function (d) {return xScale(xValue(d))},
     xAxis = d3.svg.axis()
         .scale(xScale)
-        .orient("bottom");
+        .orient("bottom")
+        .innerTickSize(-height)
+        .outerTickSize(0)
+        .tickPadding(10);
 
 //setup y
 var yValue = function(d) {return d.total_prices; },
@@ -19,14 +22,18 @@ var yValue = function(d) {return d.total_prices; },
     yAxis = d3.svg.axis()
         .scale(yScale)
         .orient("left")
-        .ticks(5);
+        .ticks(5)
+        .innerTickSize(-width)
+        .outerTickSize(0)
+        .tickPadding(10);
 
 var tip = d3.tip()
     .attr('class', 'd3-tip')
-    .offset([120,40])
+    .offset([0,120])
     .html(function (d) {
-        return "<strong> Value 2015: </strong>" + (d.val2015) + "<br>" +
-                " Number of Championships won : " + d.total_prices + "<br>"
+        return "<strong> Team: </strong>" + (d.team) + "<br>"+
+            "<strong> Value 2015: </strong>" + (d.val2015) + "<br>" +
+                " <strong >Number of Championships won : </strong> " + d.total_prices + "<br>"
     });
 
 var footballColor = "66b3ff",
@@ -34,10 +41,22 @@ var footballColor = "66b3ff",
     basketballColor = "#ff8533",
     baseballColor = "FF6666";
 
-var colValue = function (d) {return d.sport};
-var color = d3.scale.ordinal()
-    .domain(["Football", "American football", "Baseball", "Basketball"])
-    .range([soccerColor, footballColor, baseballColor, basketballColor]);
+var colValue = function (d) {return d.sport},
+    color = d3.scale.ordinal()
+        .domain(["Football", "American football", "Baseball", "Basketball"])
+        .range([soccerColor, footballColor, baseballColor, basketballColor]);
+
+function radius(d){
+    if (d.val2015 > 3) {
+        return 50;
+    }
+    if (d.val2015 > 2) {
+        return 20;
+    }
+    if (d.val2015 > 1) {
+        return 10;
+    }
+}
 
 var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -94,28 +113,14 @@ function analyze (error, data) {
         .data(data)
         .enter().append("circle")
         .attr("class", "dot")
-        .attr("r", function (d) { return d.val2015 *6})
+        .attr("r", function(d){ return radius(d)})
         .attr("cx", xMap)
         .attr("cy", yMap)
         .style("fill", function(d) { return color(colValue(d));})
+        // Assign ID
+        .attr("id", function (d) {return 'tag' + d.sport.replace(/\s+/g, '')})
         .on('mouseover',tip.show)
-        .on('mouseout', tip.hide)
-
-        // .on("mouseover", function(d) {
-        //     tooltip.transition()
-        //         .duration(200)
-        //         .style("opacity", .9);
-        //     tooltip.html(d["Team"] + "<br/> (" + xValue(d)
-        //         + ", " + yValue(d) + ")")
-        //         .style("left", (d3.event.pageX + 5) + "px")
-        //         .style("top", (d3.event.pageY - 28) + "px");
-        // })
-
-        .on("mouseout", function(d) {
-            tooltip.transition()
-                .duration(500)
-                .style("opacity", 0);
-        });
+        .on('mouseout', tip.hide);
 
     // draw legend
     var legend = svg.selectAll(".legend")
@@ -129,7 +134,17 @@ function analyze (error, data) {
         .attr("x", width - 18)
         .attr("width", 18)
         .attr("height", 18)
-        .style("fill", color);
+        .style("fill", color)
+        .on("click", function(d) {
+            console.log(d3.event, d);
+        var active = d.active ? false : true,
+            newOpacity = active ? 0 : 1;
+            d3.selectAll("#tag" + d.sport.replace(/\s +/g, ''))
+                .transition().duraction(100)
+                .style("opacity", newOpacity);
+            console.log(active);
+            d.active = active;
+        });
 
     // draw legend text
     legend.append("text")
@@ -138,5 +153,12 @@ function analyze (error, data) {
         .attr("dy", ".35em")
         .style("text-anchor", "end")
         .text(function(d) { return d;})
-
+        // .on("click", function() {
+        //     var active = d.active ? false : true,
+        //         newOpacity = active ? 0 : 1;
+        //     d3.selectAll("#tag" + d.sport.replace(/\s +/g, ''))
+        //         .transition().duraction(100)
+        //         .style("opacity", newOpacity);
+        //     d.active = active;
+        // });
 }

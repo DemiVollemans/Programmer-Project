@@ -17,6 +17,17 @@
 	.dot {
         stroke: #000;
     }
+    .dot:hover{
+        opacity: 0.5;
+    }
+
+    .tick text{
+        font-size:12px;
+    }
+
+    .tick line{
+        opacity: 0.2;
+    }
 
     .tooltip {
         position: absolute;
@@ -24,6 +35,15 @@
         height: 28px;
         pointer-events: none;
     }
+
+     .d3-tip {
+         line-height: 1;
+         font-weight:bold;
+         padding: 12px;
+         background-color: rgba(0,0,0,0.8);
+         color: #FFFFFF;
+         border-radius: 2px;
+     }
 
 </style>
 	<title> Vizualisation of Forbes' top 20 most valuable teams 2010 - 2015 </title>
@@ -33,9 +53,6 @@
 	<script src="https://d3js.org/d3.v3.js"></script>
 	<script src="http://d3js.org/queue.v1.min.js"></script>
     <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.3/nv.d3.js"></script>-->
-<!--     <link href="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.css" rel="stylesheet" type="text/css">
-    <script src="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.js"></script>" -->
 	<script src="chart1.js"></script>
 	<div id="bubblechart"><svg></svg> </div>
 </body>
