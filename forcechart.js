@@ -42,26 +42,33 @@ function forcechart (data) {
     ];
     var levels = ["regio", "euro", "world"];
 
-    formatdata.forEach(function (d) {
+    formatdata.forEach( function (d) {
         d.year = parseDate(d.year);
-        d.regio = +d.regio2010;
-        d.euro = +d.value;
+        d.regio = +d.regio;
+        d.euro = +d.euro;
         d.world = +d.world;
-        d.prices = d.prices;
 
-        var layers = d3.layout.stack()(levels.map(function (c) { return formatdata.map (function (d) {
-            return {x: d.year, y: d[c]};
+    });
+    console.log(formatdata);
+    var layers = levels.map(function (c) {
+        return formatdata.map(function(d) {
+            return {x:d.year, y: d[c]};
         })
-        }));
-        console.log(layers);
+    });
 
-        x.domain(layers[0].map(function(d) { return d.x; }));
-        y.domain([0, d3.max(layers[layers.length - 1], function(d) { return d.y0 + d.y; })]).nice();
+    var datastack = d3.layout.stack()(layers);
+    console.log(datastack)
 
-        var layer = svg.selectAll(".layer")
-            .data(layers)
+    x.domain (datastack[0].map(function (d) { return d.x;}));
+
+    y.domain([0, d3.max(datastack)[datastack.length - 1], function (d){
+        return d.y0 + d.y; }
+    ]).nice();
+
+        var layer = svg.selectAll(".stack")
+            .data(datastack)
             .enter().append("g")
-            .attr("class", "layer")
+            .attr("class", "stack")
             .style("fill", function(d, i) { return color(i); });
 
         layer.selectAll("rect")
@@ -70,7 +77,7 @@ function forcechart (data) {
             .attr("x", function(d) { return x(d.x); })
             .attr("y", function(d) { return y(d.y + d.y0); })
             .attr("height", function(d) { return y(d.y0) - y(d.y + d.y0); })
-            .attr("width", x.rangeBand() - 1);
+            .attr("width", x.rangeBand());
 
         svg.append("g")
             .attr("class", "axis axis--x")
@@ -82,12 +89,4 @@ function forcechart (data) {
             .attr("transform", "translate(" + width + ",0)")
             .call(yAxis);
 
-})}
-
-function type(d) {
-   // d.date = parseDate(d.date);
-    levels.forEach(function (c) {
-        d[c] = +d[c];
-    });
-    return d;
 }
