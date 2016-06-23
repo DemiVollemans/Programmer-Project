@@ -1,12 +1,14 @@
 Demi Vollemans <br>
-Minor Programmeren, Data Visualisatie
-Universiteit van Amsterdam
-Report
-Onderwerp
+Minor Programmeren, Data Visualisatie <br>
+Universiteit van Amsterdam <br>
+Report <br>
+
+#Onderwerp <br>
+
 Met deze visualisatie wordt meer inzichtelijk gemaakt welke 20 sportteams van over heel de wereld de meeste franchise waarde heeft, aan de hand van de schatting van het tijdschrift Forbes.  Forbes is een zakentijdschrift uit de Verenigde Staten, het tijdschrift staat bekend om zijn lijst die zij ieder jaar maakt  over de rijkste mensen van de wereld.  Zo ook maken ze sinds 2010 een lijst met de top 50 waardevolste sportteams.  De waarde is in biljoenen dollars uitgedrukt en is de enterprise waarde van het team (equity plus netto schulden). Het interessante aan deze data was om in kaart te brengen hoe de waarde van de teams die in 2015 in de top 20 stonden zich over de afgelopen 5 jaar ontwikkeld hebben. Het doel van deze visualisatie is om het verloop van het waarde per team in kaart te brengen en af te zetten tegen de ontwikkeling van de prestaties van het desbetreffende team. Zijn er meer (belangrijkere) prijzen gehaald naarmate de enterprise value?
 Zie sprintscreen 1
 
-#Design en uitvoering
+#Design en uitvoering <br>
 
 Allereerst kan er in de eerste visualisatie, de bubble chart,  bekeken worden hoe de top 20 teams het in het algemeen hebben gedaan. Op de y-as staat het aantal prijzen wat het desbetreffende team in de afgelopen 20 jaar heeft gewonnen. Op de x-as staat aangegeven hoeveel jaren het team meedoet aan de hoogste competitie van de sport die het team beoefend. Zo kan worden gezien of een (relatief) jong team in een kort termijn heel in waarde is gestegen en of het ook de prestaties relatief ten goede is gekomen.  Of juist andersom dat een team in een bepaald jaar een grote prijs heeft gewonnen en daarna in waarde is gestegen, omdat het bijvoorbeeld sponsoren trok na een kampioenschap.
 De radius van de cirkel is afhankelijk van de waarde van het team.  Hoe kleiner de cirkels hoe lager het team in de top 20 staat. De kleur bepaald de sport, zo is te zien dat er maar 4 sporten de Forbes’ top 20 beoordelen. De legenda’s zijn interactief en kunnen uitgeschakeld worden om de sporten apart te kunnen zien. Er is gekozen voor een beetje sportief design met een lichtgrijs raster op de achtergrond, die afzet tegen de zwarte achtergrond en witte letters.
@@ -18,13 +20,13 @@ De  derde visualisatie is een opgestapelde bar chart, waarin voor ieder jaar de 
 
 De drie visualisaties staan apart in een JavaScript bestand, deze komen samen in een HTML bestand, daar worden ook alle liberary’s aangeroepen en de ccs bestand style2.css. Om de pagina zo eenvoudig mogelijk in te delen is er gebruik gemaakt van Bootstrap, die de pagina in kolommen indeelt om zo makkelijk de grafieken te plaatsen.
 
-#Verbeterpunten en uitdagingen.
+#Verbeterpunten en uitdagingen. <br>
 
 De voornaamste uitdaging van deze visualisatie zaten vooral in de details, er was van te voren een bepaald design in gedachte, maar uiteindelijk konden niet alle mooie details verwezenlijkt worden. Vooral is er veel aandacht gestoken in het design van de bubble-chart, waardoor de andere visualisaties wat vertraging opliepen. Daarnaast was het soepel laten verlopen, van de mouse-over functie ook tijdrovend, uiteindelijk zijn deze door de vondst van handige functies. Ook het leren begrijpen van HTML was niet altijd eenvoudig, van het bepalen van de locatie van de charts tot een mooie layout te maken. Hier is erg veel tijd in gaan zitten, om telkens een specifiek (klein) probleem op te lossen, maar toch veel tijd kwijt zijn aan het vinden van een oplossing ervan.
 
 Betreft de verandering van mijn initiële design tot het uiteindelijke resultaat is er de keuze gemaakt deze anders te doen.  Er was gekozen om een soort prijzenkast te maken met logo’s om aan te geven welke prijzen er zijn gewonnen, uiteindelijk is hier vanaf gestapt omdat het werken met logo’s en tabellen niet makkelijk bleek te zijn me d3, ook het design aanpassen bleek lastig.  Uiteindelijk is er dus gekozen om de gestapelde bar chart te maken. Echter bleek dit ook niet een al te goede oplossing aangezien het aantal gewonnen prijzen voor bepaalde teams best laag bleek te zijn.  Daarnaast vind ik persoonlijk dat een rechthoek ook niet mooi in kaart brengt hoe knap het is om een prijs te winnen, gezien niet alle teams even succesvol te zijn geweest in de afgelopen 5 jaar.
 
-#In een ideale wereld…
+#In een ideale wereld…  <br>
 
 In een ideale wereld had ik ook graag beschikt over de data van  behaalde prijzen van de afgelopen 20 jaar. Aangezien chart 1 daar wel rekening mee houdt. Daardoor kan het een beetje krom lijken in verhouding met het aantal gewonnen kampioenschappen van de afgelopen 5 jaar. Daarnaast had ik alsnog een mooie prijzenkast willen maken, waar voor iedere prijs de desbetreffende (beker, schaal) getoond kon worden.  Daarnaast had ik ook spectaculairdere transitions en mouseover functies  willen toevoegen, zoals bijvoorbeeld als er met je muis over een bubble  gaat de andere cirkels verdwijnen op de achtergrond en dit specifieke team werd uitgelicht en meer aandacht wordt getrokken naar de andere visualisaties.
 
