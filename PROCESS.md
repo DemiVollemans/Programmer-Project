@@ -92,15 +92,9 @@ Eerste beginselen zijn gemaakt voor stacked bar chart.
 Uiteindelijk bar chart ook werkend gekregen. het ziet er niet uit.
 nu alles samen werkend zien te krijgen. Ben denk ik nog nooit zo gefrusteerd geweest in me leven denk ik.
 
-<div class="row">
-                <div class="col-md-4" id = "forcechart" >
-                    <script src = "forcechart.js"></script>
-                </div>
-                <div class="col-md-4" id = "chart2" >
-                    <script src="chart2.js"></script>
-                </div>
-                <div class="col-md-4" id = "chart1">
-                    <script src="chart1.js" ></script>
-                </div>
-            </div>
+#25
+Laatste dag voor de demo, alles werkt wel enigzins. Zitten nog een aantal bugs in.
+Die ik er helaas niet uit krijg, vandaag en gister voornamelijk aan het verslag gewerkt.
+Hopelijk is het goed genoeg om een voldoende te halen.
+
 
