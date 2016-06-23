@@ -3,7 +3,7 @@
 // bubble chart
 
 var margin = {top: 30, right: 40, bottom: 70, left: 80},
-    width = 600 - margin.left - margin.right,
+    width = 900 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
 //setup x
@@ -118,17 +118,17 @@ function analyze (error, data) {
         .attr("cx", xMap)
         .attr("cy", yMap)
         .style("fill", function(d) { return color(colValue(d));})
-        // Assign ID
+        // Assign ID for interactive legend
         .attr("id", function (d) {return 'tag' + d.sport.replace(/\s+/g, '')})
         .on('mouseover',function(d){tip.show(d); mouseOver (d) })
         .on('mouseout', tip.hide);
-
+ 
     circle.append("text")
-        .attr("text-anchor", "middle")
-        .style("fill", "#fff")
-        .text(function(d) {
-            return d.rank;
-        });
+        .attr("dy",".3em")
+        .style("text-anchor", "middle")
+        .text(function(d) { return d.rank; });
+
+    //when hovered update next charts
     function mouseOver(d) {
         d3.select(".line")
             .datum(d)

@@ -88,12 +88,15 @@ a:hover {
 .legend text {
     fill: #fff;
 }
-
+.circle text {
+    fill:white;
+}
 .legend rect {
     stroke: white;
 }
 
 .tick text{
+    font-family: 'Abel', sans-serif;
     font-size:12px;
 }
 

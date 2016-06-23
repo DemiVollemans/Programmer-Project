@@ -105,7 +105,7 @@ function lineGraph (data) {
         .style("text-anchor", "end")
         .text("Year");
 
-    // add the y axis
+    // add the left y axis
     svg.append("g")
         .attr("class", "y axis")
         .call(yAxisLeft)
@@ -119,12 +119,12 @@ function lineGraph (data) {
         .style("stroke-width", "0.05px")
         .text("Dollars ($)");
 
+    //add right y axis
     svg.append("g")
         .attr("class", "y axis")
         .attr("transform", "translate(" + width + " ,0)")
         .call(yAxisRight)
         .attr("stroke",  "#ffff66")
-        .attr("stroke-width", "0.05px")
         .append("text")
         .attr("class", "label")
         .attr("transform", "rotate(-90)")
