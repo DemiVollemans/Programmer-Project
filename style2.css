@@ -1,0 +1,127 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #000000;
+    font-family: 'Abel', sans-serif;
+    font-size: 18px;
+    color: #5B5B5B;
+}
+h1, h2, h3 {
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+    font-weight: normal;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 200;
+    color: #CFCFCF;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 2.8em;
+}
+
+h3 {
+    font-size: 1.6em;
+}
+p, ul, ol {
+    margin-top: 0;
+    line-height: 180%;
+}
+
+ul, ol {
+}
+
+a {
+    color: #5E5E5E;
+}
+
+a:hover {
+}
+
+#wrapper {
+    overflow: hidden;
+    padding: 0px 0px 30px 0px;
+    background: #121212;
+    height: 100px;
+}
+
+#logo h1 a {
+    color: #908F8F;
+    text-transform: uppercase;
+}
+
+#page {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 0px 0px 30px 0px;
+}
+/*!*path {*!*/
+    /*stroke: steelblue;*/
+    /*stroke-width: 2;*/
+    /*fill: none;*/
+/*}*/
+
+.axis path,
+.axis line {
+    fill: white;
+    stroke: #fff;
+    shape-rendering: crispEdges;
+    stroke-width: 2px;
+}
+
+.axis text{
+    fill: white;
+}
+
+.dot {
+    stroke: #fff;
+}
+
+.dot:hover{
+    opacity: 0.5;
+}
+
+.legend text {
+    fill: #fff;
+}
+
+.legend rect {
+    stroke: white;
+}
+
+.tick text{
+    font-size:12px;
+}
+
+.tick line{
+    opacity: 0.2;
+}
+
+.tooltip {
+    position: absolute;
+    width: 200px;
+    height: 28px;
+    pointer-events: none;
+}
+
+.d3-tip {
+    line-height: 1;
+    font-weight: bold;
+    padding: 12px;
+    background-color: #5E5E5E;
+    color: #FFFFFF;
+    border-radius: 2px;
+}
+
+.name{
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+}
+
+
+

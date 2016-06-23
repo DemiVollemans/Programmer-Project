@@ -1,32 +1,39 @@
-data = {"world2010": null, "world2011": null, "world2012": null, "world2013": null, "world2014": "1", "world2015": null, "euro2010": null, "euro2011": null, "euro2012": null, "euro2013": "1", "euro2014": null, "euro2015": "1", "regio2010": "1", "regio2011": "1", "regio2012": null, "regio2013": "1", "regio2014": null, "regio2015": null, "numb2013": " 2", "numb2012": " 1", "numb2011": " 1", "european_prices": " UEFA Champignions League", "numb2015": " 1", "numb2014": " 4", "rank": "2", "totalin5": " 9", "numb2010": "0", "sport": "Football", "price2011": " Copa Del Rey", "val2013": " 3.3", "val2012": " 1.877", "val2011": " 1.451", "val2010": " 1.323", "val2015": " 3.26", "val2014": " 3.44", "total_prices": " 32", "price2013": " Copa Del Rey; Champions League", "price2012": " La Liga", "worldwide_prices": null, "price2010": null, "price2014": " Copa del Rey; UEFA Champions Leage; UEFA Super Cup; FIFA World Cup", "country": " Spain", "years_competing": " 111", "domestic_prices": null, "team": " Real Madrid"},
-forcechart(data);
 function forcechart (data) {
-    var margin = {top: 20, right: 20, bottom: 30, left: 40},
-        width = 960 - margin.left - margin.right,
+    var margin = {top: 30, right: 40, bottom: 70, left: 80},
+        width = 600 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
-
-    var x = d3.scale.ordinal()
-        .rangeRoundBands([0, width], .1);
-
-    var y = d3.scale.linear()
-        .rangeRound([height, 0]);
-
+    
     var parseDate = d3.time.format("%Y").parse;
 
-    var color = d3.scale.ordinal()
-        .range(["#98abc5", "#8a89a6", "#7b6888"]);
-
-    var xAxis = d3.svg.axis()
+    //setup y
+    var x = d3.scale.ordinal()
+        .rangeRoundBands([0, width]),
+    xAxis = d3.svg.axis()
         .scale(x)
-        .orient("bottom");
+        .orient("bottom")
+        .tickFormat(d3.time.format("%Y"));
 
-    var yAxis = d3.svg.axis()
+    //setup y
+    var y = d3.scale.linear()
+        .rangeRound([height, 0]),
+    yAxis = d3.svg.axis()
         .scale(y)
-        .orient("left")
-        .tickFormat(d3.format(".2s"));
+        .orient("left");
+
+    var tip = d3.tip()
+        .attr('class', 'd3-tip')
+        .offset([0,120])
+        .html(function (d) {
+            return "<strong> Team: </strong>" + (d.prices)
+        });
+
+    var color = d3.scale.ordinal()
+        .domain(["Worldwide Championship", "Continental", "Regional Price"])
+        .range(["#98abc5", "#8a89a6", "#7b6888"]);
 
     var svg = d3.select("body")
         .append("svg")
+        .attr("id", "newline")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
@@ -40,6 +47,7 @@ function forcechart (data) {
         {year: "2014", regio: data.regio2010, euro: data.euro2014, world: data.world2014, prices: data.price2014},
         {year: "2015", regio: data.regio2010, euro: data.euro2015, world: data.world2015, prices: data.european_prices}
     ];
+   console.log("Demffsd");
     var levels = ["regio", "euro", "world"];
 
     formatdata.forEach( function (d) {
@@ -47,9 +55,8 @@ function forcechart (data) {
         d.regio = +d.regio;
         d.euro = +d.euro;
         d.world = +d.world;
-
     });
-    console.log(formatdata);
+    
     var layers = levels.map(function (c) {
         return formatdata.map(function(d) {
             return {x:d.year, y: d[c]};
@@ -57,36 +64,59 @@ function forcechart (data) {
     });
 
     var datastack = d3.layout.stack()(layers);
-    console.log(datastack)
 
     x.domain (datastack[0].map(function (d) { return d.x;}));
+    y.domain([0, 3]);
 
-    y.domain([0, d3.max(datastack)[datastack.length - 1], function (d){
-        return d.y0 + d.y; }
-    ]).nice();
+    var layer = svg.selectAll(".stack")
+        .data(datastack)
+        .enter().append("g")
+        .attr("class", "stack")
+        .style("fill", function(d, i) { return color(i); });
+        // .on('mouseover', tip.show)
+        // .on('mouseout', tip.hide);
 
-        var layer = svg.selectAll(".stack")
-            .data(datastack)
-            .enter().append("g")
-            .attr("class", "stack")
-            .style("fill", function(d, i) { return color(i); });
+    var rects = layer.selectAll("rect")
+        .data(function(d) { return d; })
+        .enter().append("rect")
+        .transition()
+        .attr("x", function(d) { return x(d.x); })
+        .attr("y", function(d) { return y(d.y + d.y0); })
+        .attr("height", function(d) { return y(d.y0) - y(d.y + d.y0); })
+        .attr("width", x.rangeBand()- 3);
 
-        layer.selectAll("rect")
-            .data(function(d) { return d; })
-            .enter().append("rect")
-            .attr("x", function(d) { return x(d.x); })
-            .attr("y", function(d) { return y(d.y + d.y0); })
-            .attr("height", function(d) { return y(d.y0) - y(d.y + d.y0); })
-            .attr("width", x.rangeBand());
+    svg.append("g")
+        .attr("class", "x axis")
+        //.attr("stroke-width", "2px")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+    console.log("bofrfgefse")
+    svg.append("g")
+        .transition()
+        .duration(1000)
+        .attr("class", "y axis")
+        .attr("transform", "translate(" + width + ",0)")
+        .call(yAxis);
 
-        svg.append("g")
-            .attr("class", "axis axis--x")
-            .attr("transform", "translate(0," + height + ")")
-            .call(xAxis);
+    //draw legend
+    var legend = svg.selectAll(".legend")
+        .data(color.domain())
+        .enter().append("g")
+        .attr("class", "legend")
+        .attr("transform", function (d, i) {return "translate(0," + i * 20 + ")"; });
 
-        svg.append("g")
-            .attr("class", "axis axis--y")
-            .attr("transform", "translate(" + width + ",0)")
-            .call(yAxis);
+    //draw rectangles of legend
+    legend.append("rect")
+        .attr("x", width + 18)
+        .attr("width", 18)
+        .attr("height", 18)
+        .style("fill", color);
 
+    //draw legend text
+    legend.append("text")
+        .attr("x", width + 80)
+        .attr("y", 9)
+        .attr("dy", ".35em")
+        .style("text-anchor", "end")
+        .text(function(d) { return d;});
 }

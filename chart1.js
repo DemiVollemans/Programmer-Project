@@ -1,5 +1,9 @@
-var margin = {top: 20, right: 30, bottom: 70, left: 40},
-    width = 960 - margin.left - margin.right,
+// Demi Vollemans
+// Programmeer Project
+// bubble chart
+
+var margin = {top: 30, right: 40, bottom: 70, left: 80},
+    width = 600 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
 //setup x
@@ -58,10 +62,11 @@ function radius(d){
     }
 }
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("body")
+    .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
-  .append("g")
+    .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var tooltip = d3.select("body").append("svg")
@@ -73,14 +78,10 @@ svg.call(tip);
 queue()
 	.defer(d3.json, '2015_.json')
 	.await(analyze); // function that uses the files
-// var klik = document.getElementById("klik")
-// klik.addEventListener(("click"), function(event) {
-//     console.log("hoi")
-// }); 
 
 function analyze (error, data) {
 	if (error) { console.log(error); }
-
+    //console.log(data)
     xScale.domain([d3.min(data, xValue)-1, 150]);
     yScale.domain([d3.min(data, yValue)-1, 45]);
 
@@ -109,7 +110,7 @@ function analyze (error, data) {
         .text("Championships");
 
     // draw dots
-    svg.selectAll(".dot")
+    var circle = svg.selectAll(".dot")
         .data(data)
         .enter().append("circle")
         .attr("class", "dot")
@@ -119,8 +120,33 @@ function analyze (error, data) {
         .style("fill", function(d) { return color(colValue(d));})
         // Assign ID
         .attr("id", function (d) {return 'tag' + d.sport.replace(/\s+/g, '')})
-        .on('mouseover',tip.show)
+        .on('mouseover',function(d){tip.show(d); mouseOver (d) })
         .on('mouseout', tip.hide);
+
+    circle.append("text")
+        .attr("text-anchor", "middle")
+        .style("fill", "#fff")
+        .text(function(d) {
+            return d.rank;
+        });
+    function mouseOver(d) {
+        d3.select(".line")
+            .datum(d)
+            .attr("id", function(d) {
+                return d.team
+            });
+        //change and remove when hovered
+        for( var i = 0; i < data.length; i++ ) {
+            if (d.team == data[i].team){
+                var tempData = data[i];
+                d3.select("#newline2").remove();
+                d3.select("#newline").remove();
+                lineGraph(tempData);
+                forcechart(tempData);
+                console.log(tempData);
+            }
+        }
+    }
 
     // draw legend
     var legend = svg.selectAll(".legend")
@@ -136,14 +162,14 @@ function analyze (error, data) {
         .attr("height", 18)
         .style("fill", color)
         .on("click", function(d) {
-            console.log(d3.event, d);
-        var active = d.active ? false : true,
-            newOpacity = active ? 0 : 1;
-            d3.selectAll("#tag" + d.sport.replace(/\s +/g, ''))
-                .transition().duraction(100)
-                .style("opacity", newOpacity);
-            console.log(active);
-            d.active = active;
+            var active = d.active ? false : true,
+                newOpacity = active ? 0 : 1;
+                d3.selectAll("#tag" + d.replace(/\s +/g, ''))
+                    .transition().duration(100)
+                    .style("opacity", newOpacity);
+                console.log(active);
+                d.active = active;
+                console.log(active)
         });
 
     // draw legend text
@@ -152,13 +178,6 @@ function analyze (error, data) {
         .attr("y", 9)
         .attr("dy", ".35em")
         .style("text-anchor", "end")
-        .text(function(d) { return d;})
-        // .on("click", function() {
-        //     var active = d.active ? false : true,
-        //         newOpacity = active ? 0 : 1;
-        //     d3.selectAll("#tag" + d.sport.replace(/\s +/g, ''))
-        //         .transition().duraction(100)
-        //         .style("opacity", newOpacity);
-        //     d.active = active;
-        // });
+        .text(function(d) { return d;});
 }
+
