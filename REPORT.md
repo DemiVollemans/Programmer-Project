@@ -1,4 +1,4 @@
-Demi Vollemans
+Demi Vollemans <br>
 Minor Programmeren, Data Visualisatie
 Universiteit van Amsterdam
 Report
