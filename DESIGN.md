@@ -1,4 +1,4 @@
-Design;
+Design
 
 De Data is makkelijk verkrijgbaar via Wikipedia en de website van Forbes. Ik wil dit graag in 5 aparte JSON files zetten iedere file voor een apart jaar, van 2010 tot 2015. Elke file zal de top 20 rijkste teams  bevatten waarvan de volgende data opgehaald zal worden; 
 - ranking
