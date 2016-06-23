@@ -40,6 +40,7 @@ var tip = d3.tip()
                 " <strong >Number of Championships won : </strong> " + d.total_prices + "<br>"
     });
 
+//define colors
 var footballColor = "66b3ff",
     soccerColor = "4dff4d",
     basketballColor = "#ff8533",
@@ -50,6 +51,7 @@ var colValue = function (d) {return d.sport},
         .domain(["Football", "American football", "Baseball", "Basketball"])
         .range([soccerColor, footballColor, baseballColor, basketballColor]);
 
+// 3 scales for size circle
 function radius(d){
     if (d.val2015 > 3) {
         return 50;
@@ -62,6 +64,7 @@ function radius(d){
     }
 }
 
+//append svg
 var svg = d3.select("body")
     .append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -75,6 +78,7 @@ var tooltip = d3.select("body").append("svg")
 
 svg.call(tip);
 
+//load data
 queue()
 	.defer(d3.json, '2015_.json')
 	.await(analyze); // function that uses the files

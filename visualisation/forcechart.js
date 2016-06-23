@@ -36,7 +36,7 @@ function forcechart (data) {
     
     //define the colors
     var color2 = d3.scale.ordinal()
-        .domain(["Worldwide Championship", "Continental", "Regional Price"])
+        .domain(["Worldwide Championship", "Continental Championship", "Regional Championship"])
         .range(["#98abc5", "#8a89a6", "#7b6888"]);
     console.log(color2.domain);
 
@@ -138,6 +138,7 @@ function forcechart (data) {
         .attr("dy", ".35em")
         .style("text-anchor", "begin")
         .text(function(d) { return d;});
-
+        
+    //remove bug legend     
     d3.select("#id3").remove();
 }

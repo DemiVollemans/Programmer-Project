@@ -32,11 +32,13 @@ function lineGraph (data) {
             .orient("right")
             .ticks(5);
 
+    //define value line
     var line1 = d3.svg.line()
         .interpolate("basis")
         .x(function (d) { return x(d.year); })
         .y(function (d) { return y0(d.value); });
 
+    //define other line
     var line2 = d3.svg.line()
         .interpolate("basis")
         .x(function (d) { return x(d.year);})
@@ -50,6 +52,7 @@ function lineGraph (data) {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+    //reformat the data
     var formatdata = [
         {year : "2010", prices: data.numb2010, value: data.val2010},
         {year : "2011", prices: data.numb2011, value: data.val2011},
