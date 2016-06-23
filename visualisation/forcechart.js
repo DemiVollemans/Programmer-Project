@@ -1,3 +1,8 @@
+// Demi Vollemans
+// Programmeer Project
+// Stacked Bar Chart
+
+
 function forcechart (data) {
     var margin = {top: 30, right: 40, bottom: 70, left: 80},
         width = 600 - margin.left - margin.right,
@@ -33,6 +38,7 @@ function forcechart (data) {
     var color2 = d3.scale.ordinal()
         .domain(["Worldwide Championship", "Continental", "Regional Price"])
         .range(["#98abc5", "#8a89a6", "#7b6888"]);
+    console.log(color2.domain);
 
     var svg = d3.select("body")
         .append("svg")
@@ -81,7 +87,7 @@ function forcechart (data) {
         .data(datastack)
         .enter().append("g")
         .attr("class", "stack")
-        .style("fill", function(i) { return color2(i); });
+        .style("fill", function(d) { return color2(d); });
         // .on('mouseover', tip.show)
         // .on('mouseout', tip.hide);
 
@@ -115,6 +121,7 @@ function forcechart (data) {
         .data(color2.domain())
         .enter().append("g")
         .attr("class", "legend")
+        .attr("id", function(d,i){return "id" + i})
         .attr("transform", function (d, i) {return "translate(0," + i * 20 + ")"; });
 
     //draw rectangles of legend
@@ -131,4 +138,6 @@ function forcechart (data) {
         .attr("dy", ".35em")
         .style("text-anchor", "begin")
         .text(function(d) { return d;});
+
+    d3.select("#id3").remove();
 }
